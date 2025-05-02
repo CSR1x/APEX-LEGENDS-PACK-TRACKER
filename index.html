@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apex Legends Pack Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5fa;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    .btn-group {
+      margin: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 5px;
+      background-color: #e0e0e0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button.active {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    .tracker-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    .pack-tracker {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 250px;
+    }
+
+    .pack-tracker input {
+      width: 100%;
+      margin: 10px 0;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #heirlooms-tab {
+      display: none;
+      padding: 20px;
+    }
+
+    .heirloom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      justify-items: center;
+    }
+
+    .heirloom img {
+      width: 120px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .heirloom img:hover {
+      transform: scale(1.05);
+    }
+
+    .heirloom p {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* Fullscreen overlay for image viewer */
+    #image-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #image-overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px black;
+    }
+
+    #image-overlay:active {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Apex Legends Pack Tracker</h1>
+
+  <div class="btn-group">
+    <button onclick="showTab('tracker')" id="tracker-btn">Pack Tracker</button>
+    <button onclick="showTab('heirlooms')" id="heirlooms-btn">Heirlooms</button>
+  </div>
+
+  <!-- Pack Tracker -->
+  <div class="tracker-container">
+    <div class="pack-tracker" data-user="cr">
+      <h3>CR's Pack Tracker</h3>
+      <input type="number" class="base-input" placeholder="Enter base packs">
+      <input type="number" class="special-input" placeholder="Enter special packs">
+      <p>Total Base Packs: <span class="base-output">0</span></p>
+      <p>Total Special Packs: <span class="special-output">0</span></p>
+      <p>Total Packs: <span class="total-output">0</span></p>
+    </div>
+    <div class="pack-tracker" data-user="zuza">
+      <h3>Zuza's Pack Tracker</h3>
+      <input type="number" class="base-input" placeholder="Enter base packs">
+      <input type="number" class="special-input" placeholder="Enter special packs">
+      <p>Total Base Packs: <span class="base-output">0</span></p>
+      <p>Total Special Packs: <span class="special-output">0</span></p>
+      <p>Total Packs: <span class="total-output">0</span></p>
+    </div>
+    <div class="pack-tracker" data-user="david">
+      <h3>David's Pack Tracker</h3>
+      <input type="number" class="base-input" placeholder="Enter base packs">
+      <input type="number" class="special-input" placeholder="Enter special packs">
+      <p>Total Base Packs: <span class="base-output">0</span></p>
+      <p>Total Special Packs: <span class="special-output">0</span></p>
+      <p>Total Packs: <span class="total-output">0</span></p>
+    </div>
+  </div>
+
+  <!-- Heirlooms Tab -->
+  <div id="heirlooms-tab">
+    <h2>Original Heirlooms</h2>
+    <div class="heirloom-grid">
+      <!-- Add all original heirlooms here -->
+      <div class="heirloom"><img src="images/crypto.png" alt="Crypto"><p>Crypto</p></div>
+      <div class="heirloom"><img src="images/pathfinder.png" alt="Pathfinder"><p>Pathfinder</p></div>
+      <div class="heirloom"><img src="images/octane.png" alt="Octane"><p>Octane</p></div>
+      <div class="heirloom"><img src="images/bangalore.png" alt="Bangalore"><p>Bangalore</p></div>
+      <div class="heirloom"><img src="images/revenant.png" alt="Revenant"><p>Revenant</p></div>
+      <div class="heirloom"><img src="images/caustic.png" alt="Caustic"><p>Caustic</p></div>
+      <div class="heirloom"><img src="images/wattson.png" alt="Wattson"><p>Wattson</p></div>
+      <div class="heirloom"><img src="images/loba.png" alt="Loba"><p>Loba</p></div>
+      <div class="heirloom"><img src="images/horizon.png" alt="Horizon"><p>Horizon</p></div>
+      <div class="heirloom"><img src="images/wraith.png" alt="Wraith"><p>Wraith</p></div>
+      <div class="heirloom"><img src="images/rampart.png" alt="Rampart"><p>Rampart</p></div>
+      <div class="heirloom"><img src="images/bloodhound.png" alt="Bloodhound"><p>Bloodhound</p></div>
+      <div class="heirloom"><img src="images/fuse.png" alt="Fuse"><p>Fuse</p></div>
+      <div class="heirloom"><img src="images/lifeline.png" alt="Lifeline"><p>Lifeline</p></div>
+      <div class="heirloom"><img src="images/seer.png" alt="Seer"><p>Seer</p></div>
+      <div class="heirloom"><img src="images/ash.png" alt="Ash"><p>Ash</p></div>
+      <div class="heirloom"><img src="images/valkyrie.png" alt="Valkyrie"><p>Valkyrie</p></div>
+      <div class="heirloom"><img src="images/mirage.png" alt="Mirage"><p>Mirage</p></div>
+      <div class="heirloom"><img src="images/gibraltar.png" alt="Gibraltar"><p>Gibraltar</p></div>
+    </div>
+
+    <h2>Recolor Heirlooms</h2>
+    <div class="heirloom-grid">
+      <div class="heirloom"><img src="images/wraith_recolor.png" alt="Wraith Recolor"><p>Wraith (Recolor)</p></div>
+      <div class="heirloom"><img src="images/revenant_recolor.png" alt="Revenant Recolor"><p>Revenant (Recolor)</p></div>
+      <div class="heirloom"><img src="images/crypto_recolor.png" alt="Crypto Recolor"><p>Crypto (Recolor)</p></div>
+      <div class="heirloom"><img src="images/bangalore_recolor.png" alt="Bangalore Recolor"><p>Bangalore (Recolor)</p></div>
+      <div class="heirloom"><img src="images/octane_recolor.png" alt="Octane Recolor"><p>Octane (Recolor)</p></div>
+      <div class="heirloom"><img src="images/bloodhound_recolor.png" alt="Bloodhound Recolor"><p>Bloodhound (Recolor)</p></div>
+    </div>
+  </div>
+
+  <!-- Fullscreen image overlay -->
+  <div id="image-overlay" onclick="this.style.display='none'">
+    <img src="" alt="Full Image" id="overlay-img">
+  </div>
+
+  <script>
+    function showTab(tab) {
+      localStorage.setItem('selectedTab', tab);
+      document.getElementById('heirlooms-tab').style.display = tab === 'heirlooms' ? 'block' : 'none';
+      document.querySelector('.tracker-container').style.display = tab === 'tracker' ? 'flex' : 'none';
+      document.getElementById('tracker-btn').classList.toggle('active', tab === 'tracker');
+      document.getElementById('heirlooms-btn').classList.toggle('active', tab === 'heirlooms');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTab = localStorage.getItem('selectedTab') || 'tracker';
+      showTab(savedTab);
+
+      document.querySelectorAll('.pack-tracker').forEach(container => {
+        const user = container.dataset.user;
+        const baseInput = container.querySelector('.base-input');
+        const specialInput = container.querySelector('.special-input');
+        const baseOutput = container.querySelector('.base-output');
+        const specialOutput = container.querySelector('.special-output');
+        const totalOutput = container.querySelector('.total-output');
+
+        // Load saved values
+        const saved = JSON.parse(localStorage.getItem('tracker_' + user)) || { base: 0, special: 0 };
+        baseInput.value = saved.base;
+        specialInput.value = saved.special;
+        baseOutput.textContent = saved.base;
+        specialOutput.textContent = saved.special;
+        totalOutput.textContent = saved.base + saved.special;
+
+        const updateTotals = () => {
+          const base = parseInt(baseInput.value) || 0;
+          const special = parseInt(specialInput.value) || 0;
+          const total = base + special;
+          baseOutput.textContent = base;
+          specialOutput.textContent = special;
+          totalOutput.textContent = total;
+
+          localStorage.setItem('tracker_' + user, JSON.stringify({ base, special }));
+        };
+
+        baseInput.addEventListener('input', updateTotals);
+        specialInput.addEventListener('input', updateTotals);
+      });
+
+      // Fullscreen image viewer
+      document.querySelectorAll('.heirloom img').forEach(img => {
+        img.addEventListener('click', () => {
+          const overlay = document.getElementById('image-overlay');
+          const overlayImg = document.getElementById('overlay-img');
+          overlayImg.src = img.src;
+          overlay.style.display = 'flex';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
